@@ -1,0 +1,749 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #651c38,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #13040b,
+            #3d1022,
+            #090207
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #ffb6ca;
+
+    box-shadow:
+        0 0 10px #ff668c;
+
+    animation:
+        floatUp linear forwards;
+}
+
+@keyframes floatUp {
+
+    from {
+        transform:
+            translateY(110vh)
+            scale(1);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    to {
+        transform:
+            translateY(-10vh)
+            scale(0);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+
+.small-title {
+
+    color: #ff9fba;
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 15px;
+}
+
+
+h1 {
+
+    font-size:
+        clamp(
+            40px,
+            9vw,
+            65px
+        );
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 20px
+        rgba(255, 70, 120, 0.5);
+}
+
+
+.subtitle {
+
+    color: #e7b7c5;
+
+    margin-bottom: 40px;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   ENVELOPE CONTAINER
+========================= */
+
+.envelope-container {
+
+    width: 340px;
+
+    max-width: 90vw;
+
+    height: 250px;
+
+    perspective: 1000px;
+}
+
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 210px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.4s ease;
+}
+
+.envelope:hover {
+
+    transform:
+        translateY(-8px);
+}
+
+
+/* =========================
+   LETTER
+========================= */
+
+.letter {
+
+    position: absolute;
+
+    width: 90%;
+
+    left: 5%;
+
+    bottom: 10px;
+
+    min-height: 315px;
+
+    background: #fffafa;
+
+    color: #432531;
+
+    padding: 27px;
+
+    border-radius: 8px;
+
+    text-align: left;
+
+    transform:
+        translateY(0);
+
+    transition:
+        transform 1s
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        );
+
+    z-index: 10;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+.letter h2 {
+
+    text-align: center;
+
+    color: #a52d50;
+
+    margin-bottom: 20px;
+}
+
+
+.letter p {
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 12px;
+}
+
+
+.signature {
+
+    text-align: right;
+
+    margin-top: 20px;
+
+    color: #a52d50;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   ENVELOPE BODY
+========================= */
+
+.envelope-body {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e25d82,
+            #922442
+        );
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 25px 45px
+        rgba(0, 0, 0, 0.45);
+
+    z-index: 2;
+}
+
+
+.envelope-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            35deg,
+            transparent 49%,
+            rgba(255,255,255,0.15) 50%,
+            transparent 51%
+        ),
+
+        linear-gradient(
+            -35deg,
+            transparent 49%,
+            rgba(255,255,255,0.15) 50%,
+            transparent 51%
+        );
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   FLAP
+========================= */
+
+.flap {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 0;
+
+    height: 0;
+
+    border-left:
+        170px solid transparent;
+
+    border-right:
+        170px solid transparent;
+
+    border-top:
+        125px solid #b9365d;
+
+    transform-origin:
+        top center;
+
+    transition:
+        transform 1s
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        );
+
+    z-index: 5;
+}
+
+
+/* =========================
+   CLICK TEXT
+========================= */
+
+.click-text {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 8;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s;
+}
+
+
+/* =========================
+   OPEN ENVELOPE
+========================= */
+
+.envelope.open .envelope-body {
+
+    z-index: 0;
+}
+
+
+.envelope.open .flap {
+
+    transform:
+        rotateX(180deg);
+
+    z-index: 1;
+}
+
+
+.envelope.open .letter {
+
+    transform:
+        translateY(-175px);
+
+    z-index: 10;
+}
+
+
+.envelope.open .click-text {
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   CONTINUE BUTTON
+========================= */
+
+#continueBtn {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding:
+        14px 30px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff668c,
+            #a8274d
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            255,
+            60,
+            110,
+            0.3
+        );
+
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+
+
+#continueBtn.show {
+
+    display: block;
+
+    animation:
+        fadeUp 0.7s ease;
+}
+
+
+#continueBtn:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    box-shadow:
+        0 15px 35px
+        rgba(
+            255,
+            60,
+            110,
+            0.5
+        );
+}
+
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+.final-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #68182f,
+            #17050c 50%,
+            #030103
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1s ease;
+}
+
+
+.final-screen.show {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.final-content {
+
+    padding: 25px;
+}
+
+
+.final-small {
+
+    color: #ff9eb9;
+
+    letter-spacing: 5px;
+
+    font-size: 13px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   IRON MAN
+========================= */
+
+.final-content h2 {
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(
+            45px,
+            11vw,
+            90px
+        );
+
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    color: white;
+
+    text-shadow:
+
+        0 0 10px white,
+
+        0 0 25px #ff315e,
+
+        0 0 50px #ff174c,
+
+        0 0 100px #ff174c;
+
+    animation:
+        ironGlow 1.5s
+        infinite alternate;
+}
+
+
+@keyframes ironGlow {
+
+    from {
+
+        transform:
+            scale(1);
+
+        text-shadow:
+
+            0 0 10px white,
+
+            0 0 25px #ff315e,
+
+            0 0 50px #ff174c;
+    }
+
+    to {
+
+        transform:
+            scale(1.04);
+
+        text-shadow:
+
+            0 0 15px white,
+
+            0 0 40px #ff6688,
+
+            0 0 80px #ff174c,
+
+            0 0 120px #ff174c;
+    }
+}
+
+
+.final-message {
+
+    margin-top: 25px;
+
+    color: #ffd5df;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+#restartBtn {
+
+    margin-top: 35px;
+
+    padding:
+        11px 25px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid #ff7898;
+
+    background: transparent;
+
+    color: #ffb7c8;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s,
+        transform 0.3s;
+}
+
+
+#restartBtn:hover {
+
+    background:
+        rgba(
+            255,
+            100,
+            140,
+            0.15
+        );
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .envelope-container {
+
+        width: 290px;
+    }
+
+    .flap {
+
+        border-left-width:
+            145px;
+
+        border-right-width:
+            145px;
+    }
+
+    .letter {
+
+        padding: 20px;
+    }
+
+    .letter p {
+
+        font-size: 13px;
+    }
+
+    .envelope.open .letter {
+
+        transform:
+            translateY(-170px);
+    }
+
+    .final-content h2 {
+
+        letter-spacing: 2px;
+    }
+}
